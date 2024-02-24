@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import uniqid from "uniqid";
-import { Forma } from "./components/Form/Form";
-import { Input } from "./components/inputs/Input";
-import { ContactRender } from "./components/ContactRender/ConstactRender";
+import Forma from "../Form/Form";
+import Input from "../inputs/Input";
+import ContactRender from "../ContactRender/ConstactRender";
 
 export class App extends Component {
   state = {

@@ -21,21 +21,36 @@ export const Forma = (props) => {
         name: "",
         number: "",
       }}
+      validationSchema={SignupSchema}
       onSubmit={(values, actions) => {
         props.submitForm(values);
         actions.resetForm();
       }}
     >
-      <Form autoComplete="off" className={form}>
-        <label htmlFor="name">Name</label>
-        <Field name={"name"} label={"Name"} id="name" />
-        <label htmlFor="number">Name</label>
-        <Field name={"number"} label={"Number"} id="number" />
+      {({ errors, touched }) => (
+        <Form autoComplete="off" className={form}>
+          <div className={css.label}>
+            <label htmlFor="name">Name</label>
+            <Field name={"name"} label={"Name"} id="name" />
+            {errors.name && touched.name ? (
+              <div className={css.error}>{errors.name}</div>
+            ) : null}
+          </div>
+          <div className={css.label}>
+            <label htmlFor="number">Number</label>
+            <Field name={"number"} label={"Number"} id="number" />
+            {errors.number && touched.number ? (
+              <div className={css.error}>{errors.number}</div>
+            ) : null}
+          </div>
 
-        <button type="submit" className={submit}>
-          Add contact
-        </button>
-      </Form>
+          <button type="submit" className={submit}>
+            Add contact
+          </button>
+        </Form>
+      )}
     </Formik>
   );
 };
+
+export default Forma;

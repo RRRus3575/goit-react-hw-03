@@ -25,3 +25,5 @@ export class ContactRender extends Component {
     );
   }
 }
+
+export default ContactRender;

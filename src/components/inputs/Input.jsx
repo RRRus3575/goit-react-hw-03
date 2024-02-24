@@ -15,3 +15,5 @@ export const Input = ({ label, name, value, type, onChange }) => {
     </label>
   );
 };
+
+export default Input;

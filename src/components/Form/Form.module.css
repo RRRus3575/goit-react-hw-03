@@ -25,3 +25,11 @@ button:active {
   background-color: #403181;
   color: #ffffff;
 }
+.error {
+  color: #d72626;
+}
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}

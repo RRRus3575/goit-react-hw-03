@@ -1,4 +1,4 @@
-import css from "./Form.module.css";
+import css from "./ContactForm.module.css";
 import * as Yup from "yup";
 import { Formik, Form, Field } from "formik";
 
@@ -13,7 +13,7 @@ const SignupSchema = Yup.object().shape({
     .required("Required"),
 });
 
-export const Forma = (props) => {
+export const Forma = ({ submitForm }) => {
   const { form, submit } = css;
   return (
     <Formik
@@ -23,7 +23,7 @@ export const Forma = (props) => {
       }}
       validationSchema={SignupSchema}
       onSubmit={(values, actions) => {
-        props.submitForm(values);
+        submitForm(values);
         actions.resetForm();
       }}
     >

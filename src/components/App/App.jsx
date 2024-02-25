@@ -1,118 +1,94 @@
-import React, { Component } from "react";
+import { useEffect, useState } from "react";
 import uniqid from "uniqid";
-import Forma from "../Form/Form";
-import Input from "../inputs/Input";
-import ContactRender from "../ContactRender/ConstactRender";
+import Forma from "../ContactForm/ContactForm";
+import Input from "../SearchBox/SearchBox";
+import ContactRender from "../Contact/Constact";
 
-export class App extends Component {
-  state = {
-    contacts: [
+export const App = () => {
+  const [filter, setFilter] = useState("");
+  const [contacts, setContacts] = useState(() => {
+    const contacts = localStorage.getItem("contacts");
+
+    const parsedContacts = JSON.parse(contacts);
+
+    if (parsedContacts) {
+      return parsedContacts;
+    }
+    return [
       { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
       { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
       { id: "id-3", name: "Eden Clements", number: "645-17-79" },
       { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
-    ],
+    ];
+  });
 
-    filter: "",
+  const handleDelete = (nameEl) => {
+    setContacts((prev) => prev.filter(({ id }) => id !== nameEl));
   };
-  handleDelete = (nameEl) => {
-    this.setState((prev) => {
-      return {
-        contacts: prev.contacts.filter(({ id }) => id !== nameEl),
-      };
-    });
-  };
-  handleSubmit = (values) => {
-    const formDate = values;
-    console.log("app", formDate.name);
-    if (
-      this.state.contacts.find(
-        (el) => el.name.toLowerCase() === formDate.name.toLowerCase()
-      )
-    ) {
-      alert(`${formDate.name} is alredy in contacts`);
+
+  const handleSubmit = (values) => {
+    const { name, number } = values;
+    if (contacts.find((el) => el.name.toLowerCase() === name.toLowerCase())) {
+      alert(`${name} is alredy in contacts`);
+      return;
     }
 
-    this.setState((prev) => {
-      return {
-        contacts: prev.contacts.concat({
-          name: formDate.name,
-          number: formDate.number,
-          id: uniqid(),
-        }),
-      };
-    });
+    setContacts((prev) =>
+      prev.concat({
+        name: name,
+        number: number,
+        id: uniqid(),
+      })
+    );
   };
 
-  handleSearch = ({ target: { value: filter } }) => {
-    this.setState({
-      filter,
-    });
+  const handleSearch = ({ target: { value: filter } }) => {
+    setFilter(filter);
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.contacts !== prevState.contacts) {
-      localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
-    }
-  }
-
-  contactFilter = () => {
-    const { filter, contacts } = this.state;
-
+  const contactFilter = () => {
     const cont = contacts.filter((el) =>
       el.name.toLowerCase().includes(filter.toLowerCase())
     );
-
     return cont;
   };
 
-  componentDidMount() {
-    const contacts = localStorage.getItem("contacts");
-    const parsedContacts = JSON.parse(contacts);
-    if (parsedContacts) {
-      this.setState({
-        contacts: parsedContacts,
-      });
-    }
-  }
+  useEffect(() => {
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+  }, [contacts]);
 
-  render() {
-    return (
-      <div
-        style={{
-          margin: 50,
-        }}
-      >
-        <div>
-          <h1>Phonebook</h1>
-          <Forma submitForm={this.handleSubmit} />
-        </div>
-        <div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-            }}
-          >
-            <h2>Contacts</h2>
-            <Input
-              onChange={this.handleSearch}
-              value={this.state.filter}
-              type={"text"}
-              name={"filter"}
-              label={"Find contacts by name"}
-            />
+  return (
+    <div
+      style={{
+        margin: 50,
+      }}
+    >
+      <div>
+        <h1>Phonebook</h1>
+        <Forma submitForm={handleSubmit} />
+      </div>
+      <div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+          }}
+        >
+          <h2>Contacts</h2>
+          <Input
+            onChange={handleSearch}
+            value={filter}
+            type={"text"}
+            name={"filter"}
+            label={"Find contacts by name"}
+          />
 
-            <ContactRender
-              contacts={this.contactFilter()}
-              onClick={this.handleDelete}
-            />
-          </div>
+          <ContactRender contacts={contactFilter()} onClick={handleDelete} />
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default App;

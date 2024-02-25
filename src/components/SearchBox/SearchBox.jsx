@@ -1,4 +1,4 @@
-import css from "./Input.module.css";
+import css from "./SearchBox.module.css";
 
 export const Input = ({ label, name, value, type, onChange }) => {
   return (

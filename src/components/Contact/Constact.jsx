@@ -1,6 +1,6 @@
 import css from "./Contact.module.css";
 
-export const ContactRender = ({ onClick, contacts }) => {
+export const Contact = ({ onClick, contacts }) => {
   return (
     <ul>
       {contacts.map((el) => (
@@ -21,4 +21,4 @@ export const ContactRender = ({ onClick, contacts }) => {
   );
 };
 
-export default ContactRender;
+export default Contact;

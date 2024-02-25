@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import uniqid from "uniqid";
-import Forma from "../ContactForm/ContactForm";
-import Input from "../SearchBox/SearchBox";
-import ContactRender from "../Contact/Constact";
+import ContactForm from "../ContactForm/ContactForm";
+import SearchBox from "../SearchBox/SearchBox";
+import Contact from "../Contact/Constact";
 
 export const App = () => {
   const [filter, setFilter] = useState("");
@@ -65,7 +65,7 @@ export const App = () => {
     >
       <div>
         <h1>Phonebook</h1>
-        <Forma submitForm={handleSubmit} />
+        <ContactForm submitForm={handleSubmit} />
       </div>
       <div>
         <div
@@ -76,7 +76,7 @@ export const App = () => {
           }}
         >
           <h2>Contacts</h2>
-          <Input
+          <SearchBox
             onChange={handleSearch}
             value={filter}
             type={"text"}
@@ -84,7 +84,7 @@ export const App = () => {
             label={"Find contacts by name"}
           />
 
-          <ContactRender contacts={contactFilter()} onClick={handleDelete} />
+          <Contact contacts={contactFilter()} onClick={handleDelete} />
         </div>
       </div>
     </div>

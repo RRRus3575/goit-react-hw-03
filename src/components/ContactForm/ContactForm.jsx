@@ -13,7 +13,7 @@ const SignupSchema = Yup.object().shape({
     .required("Required"),
 });
 
-export const Forma = ({ submitForm }) => {
+export const ContactForm = ({ submitForm }) => {
   const { form, submit } = css;
   return (
     <Formik
@@ -53,4 +53,4 @@ export const Forma = ({ submitForm }) => {
   );
 };
 
-export default Forma;
+export default ContactForm;

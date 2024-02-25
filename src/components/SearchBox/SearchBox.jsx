@@ -1,6 +1,6 @@
 import css from "./SearchBox.module.css";
 
-export const Input = ({ label, name, value, type, onChange }) => {
+export const SearchBox = ({ label, name, value, type, onChange }) => {
   return (
     <label className={css.label}>
       {label}
@@ -16,4 +16,4 @@ export const Input = ({ label, name, value, type, onChange }) => {
   );
 };
 
-export default Input;
+export default SearchBox;

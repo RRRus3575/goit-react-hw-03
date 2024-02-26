@@ -3,6 +3,7 @@ import uniqid from "uniqid";
 import ContactForm from "../ContactForm/ContactForm";
 import SearchBox from "../SearchBox/SearchBox";
 import Contact from "../Contact/Constact";
+import ContactList from "../ContactList/ContactList";
 
 export const App = () => {
   const [filter, setFilter] = useState("");
@@ -83,8 +84,7 @@ export const App = () => {
             name={"filter"}
             label={"Find contacts by name"}
           />
-
-          <Contact contacts={contactFilter()} onClick={handleDelete} />
+          <ContactList contacts={contactFilter()} onClick={handleDelete} />
         </div>
       </div>
     </div>

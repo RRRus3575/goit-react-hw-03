@@ -1,10 +1,12 @@
 import Contact from "../Contact/Constact";
 import css from "./ContactList.module.css";
 
-export const ContactList = ({ onClick, contacts }) => {
+export const ContactList = ({ contacts, onClick }) => {
   return (
-    <ul className={css.list}>
-      <Contact contacts={contacts} onClick={onClick} />
+    <ul>
+      {contacts.map(({ id, name, number }) => (
+        <Contact id={id} name={name} number={number} click={onClick} key={id} />
+      ))}
     </ul>
   );
 };

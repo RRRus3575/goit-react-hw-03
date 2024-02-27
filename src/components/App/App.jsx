@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import uniqid from "uniqid";
 import ContactForm from "../ContactForm/ContactForm";
 import SearchBox from "../SearchBox/SearchBox";
-import Contact from "../Contact/Constact";
 import ContactList from "../ContactList/ContactList";
 
 export const App = () => {
@@ -24,6 +23,8 @@ export const App = () => {
   });
 
   const handleDelete = (nameEl) => {
+    console.log("dlete");
+    console.log(nameEl);
     setContacts((prev) => prev.filter(({ id }) => id !== nameEl));
   };
 

@@ -5,7 +5,7 @@ export const ContactList = ({ contacts, onClick }) => {
   return (
     <ul>
       {contacts.map(({ id, name, number }) => (
-        <Contact id={id} name={name} number={number} click={onClick} key={id} />
+        <Contact id={id} name={name} number={number} click={onClick} />
       ))}
     </ul>
   );

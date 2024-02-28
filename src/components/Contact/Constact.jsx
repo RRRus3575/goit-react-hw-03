@@ -1,8 +1,8 @@
 import css from "./Contact.module.css";
 
-export const Contact = ({ id, name, number, click }) => {
+export const Contact = ({ id, name, number, onDelete }) => {
   const handleDelete = (id) => {
-    click(id);
+    onDelete(id);
   };
   return (
     <li key={id}>

@@ -23,15 +23,15 @@ export const App = () => {
   });
 
   const handleDelete = (nameEl) => {
-    console.log("dlete");
-    console.log(nameEl);
     setContacts((prev) => prev.filter(({ id }) => id !== nameEl));
   };
 
   const handleSubmit = (values) => {
     const { name, number } = values;
     if (contacts.find((el) => el.name.toLowerCase() === name.toLowerCase())) {
-      alert(`${name} is alredy in contacts`);
+      alert(
+        `${name} is alredy in contacts. You can specify a different name 😉`
+      );
       return;
     }
 
@@ -48,7 +48,7 @@ export const App = () => {
     setFilter(filter);
   };
 
-  const contactFilter = () => {
+  const getFilteredContacts = () => {
     const cont = contacts.filter((el) =>
       el.name.toLowerCase().includes(filter.toLowerCase())
     );
@@ -81,11 +81,12 @@ export const App = () => {
           <SearchBox
             onChange={handleSearch}
             value={filter}
-            type={"text"}
-            name={"filter"}
             label={"Find contacts by name"}
           />
-          <ContactList contacts={contactFilter()} onClick={handleDelete} />
+          <ContactList
+            contacts={getFilteredContacts()}
+            onDelete={handleDelete}
+          />
         </div>
       </div>
     </div>
